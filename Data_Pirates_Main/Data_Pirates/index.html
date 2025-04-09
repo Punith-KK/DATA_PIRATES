@@ -19,6 +19,151 @@
           type="text/css"
   />
   <style>
+#nav-dropdown {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 1rem;
+  background: #ffffff;
+  font-weight: bold;
+  color: #c71f1f;
+  border: none;
+  cursor: pointer;
+  appearance: none;
+  position: relative;
+  z-index: 1;
+  outline: none;
+  box-shadow: 0 0 0 3px transparent;
+  transition: all 0.3s ease-in-out;
+  animation: borderSpin 5s linear infinite;
+  background-image: linear-gradient(white, white),
+    linear-gradient(120deg, #aaa, #ddd, #aaa, #ddd);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  border: 3px solid transparent;
+}
+
+/* On focus or hover, intensify the glow */
+#nav-dropdown:hover,
+#nav-dropdown:focus {
+  box-shadow: 10px 10px 10px rgba(25, 18, 18, 0.5);
+  animation: borderSpinFast 5s linear infinite;
+}
+
+/* Keyframes for border animation */
+@keyframes borderSpin {
+  0% {
+    background-position: 0% 50%, 0% 50%;
+  }
+  100% {
+    background-position: 400% 50%, 400% 50%;
+  }
+}
+
+@keyframes borderSpinFast {
+  0% {
+    background-position: 0% 50%, 0% 50%;
+  }
+  100% {
+    background-position: 400% 50%, 400% 50%;
+  }
+}
+
+
+
+
+.dookan-logo {
+  animation: glowPulse 2s infinite, flicker 3s infinite;
+  filter: drop-shadow(0 0 10px #ff4500) drop-shadow(0 0 20px #ffd700);
+  transition: all 0.3s ease-in-out;
+  border-radius: 12px; /* optional, makes it softer */
+}
+
+/* Neon border & stronger glow on hover */
+.dookan-logo:hover {
+  box-shadow:
+    0 0 10px #00ffff,
+    0 0 20px #ff00ff,
+    0 0 30px #00ffff,
+    0 0 40px #ff00ff;
+  outline: 3px solid transparent;
+  outline-offset: 0px;
+  border: 2px solid transparent;
+  background-image: linear-gradient(#000, #000), linear-gradient(45deg, #00ffff, #ff00ff, #00ff99);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #ff00ff);
+}
+/* Glowing pulse */
+@keyframes glowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 5px #ff4500) drop-shadow(0 0 15px #ffd700);
+  }
+  50% {
+    filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 40px #ff00ff);
+  }
+}
+/* Subtle flicker effect */
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    opacity: 1;
+  }
+  20%, 22%, 24%, 55% {
+    opacity: 0.7;
+  }
+} 
+
+
+
+    #nav-dropdown {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  background: #fff;
+  color: #000;
+  border: none;
+  cursor: pointer;
+}
+
+    .our-work-container{
+      background-color: #94f4f4;
+    }
+    div.work-element-flex {
+  background-color: #0505058e !important;
+  border-radius: 3rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+div.work-element-flex:hover {
+  background-color: #ec0c0c58 !important;
+  border-color: #facc15; /* neon yellow border */
+  box-shadow: 0 0 12px #facc15, 0 0 24px #facc15;
+  transform: scale(1.02);
+  animation: neonPulse 1.2s infinite;
+  cursor: pointer;
+}
+
+@keyframes neonPulse {
+  0% {
+    box-shadow: 0 0 12px #facc15, 0 0 24px #facc15;
+  }
+  50% {
+    box-shadow: 0 0 18px #facc15, 0 0 36px #facc15;
+  }
+  100% {
+    box-shadow: 0 0 12px #facc15, 0 0 24px #facc15;
+  }
+}
+.secondary-heading.work-heading {
+  z-index: 5;
+  color: #eb2f2f;
+  background-color: #94f4f4;
+}
+
+
     @media (min-width: 992px) {
         html.w-mod-js:not(.w-mod-ix)
           [data-w-id="55caef5c-b01e-84c6-d062-f16e9fdc6d48"] {
@@ -514,7 +659,7 @@
   <div class="navbar">
     <a
             data-w-id="4f5d9efe-164d-9a13-b307-e812c7d621cd"
-            href="/"
+            href="#"
             aria-current="page"
             class="logo-container w-inline-block w--current"
     ><img
@@ -526,7 +671,6 @@
     <div class="links-container">
       <a
               data-w-id="85e4113f-658d-03a9-e480-a69e0fbd78b2"
-              href=""
               target="_blank"
               class="nav-link-parent w-inline-block"
       ><div class="nav-link-shimmer-container">
@@ -538,15 +682,24 @@
                 class="new-image"
         />
       </div>
-        <div class="nav-link-text">MADE WITH <br><center>❤️<br></center></div></a
-      >
+      <div class="nav-link-text">
+        <select id="nav-dropdown" onchange="scrollToSection(this.value)">
+          <option value="">Home</option>
+          <option value="tech-stack">Tech Stack</option>
+          <option value="chatbot-use">About Chatbot</option>
+          <option value="solutions">Solutions Offered</option>
+          <option value="faq">FAQ</option>
+          <option value="contact">Contact Us</option>
+        </select>
+      </div>
+
       <div class="mobile-links">
         <a href="#" class="mobile-link hide">ABOUT</a
         ><a href="" class="mobile-link">work</a>
       </div>
       <a
               data-w-id="85e4113f-658d-03a9-e480-a69e0fbd78c5"
-              href="https://www.google.com"
+              href="http://localhost:3000"
               target="_blank"
               class="outline-btn w-button"
       >VISIT PROJECT</a
@@ -754,7 +907,7 @@
           <a
                   id="shimmer-container"
                   data-w-id="297f89c9-25db-a262-56c8-d38394595e2c"
-                  href="https://www.google.com"
+                  href="http://localhost:3000"
                   target="_blank"
                   class="outline-btn hero w-inline-block"
           ><div class="button-text">VIEW  PROJECT</div>
@@ -1330,7 +1483,7 @@
         >
         </h1>
         <div class="primary-text white">
-          🚀 Supercharge your customer experience with our AI-powered chatbot – it’s like a support ninja, but way cooler! 🤖<br /><br />
+          Supercharge your customer experience with our AI-powered chatbot🚀 – it’s like a support ninja, but way cooler! 🤖<br /><br />
           Built to understand your vibe, assist like a pro, and solve issues faster than you can say “Hold, please.” ⚡🙌<br /><br />
           From “Where’s my order?” 📦 to “Why does my screen look weird?” 👀 – it’s got your back, 24/7. No sleep. No snacks. Just support. 😴❌🍕<br /><br />
           Boost retention, crush queries, and let the chatbot handle the chaos while you sip your coffee in peace ☕😎.
@@ -1344,11 +1497,11 @@
         class="our-work-container wrapper"
 >
   <div class="our-work-section">
-    <div class="our-work-flex">
+    <div class="our-work-flex" id="tech-stack">
       <div class="our-work-left-video-container">
         <div class="our-work-left-video">
           <h1 class="secondary-heading work-heading home">
-            damn! <span class="white-span">We did this?</span>
+            Tech Stack <span class="white-span">Overview🚀</span>
           </h1>
           <div class="video-container">
             <div
@@ -1834,7 +1987,7 @@
                 style="opacity: 0"
                 class="secondary-heading work-heading hide"
         >
-          Damn! <span class="white-span">We did this?</span>
+          Tech Stack <span class="white-span"> Overview!🚀</span>
         </h1>
         <div
                 data-w-id="e5a661b7-b266-86f2-7c27-243985c00f04"
@@ -1845,10 +1998,13 @@
                   class="work-element-flex default all content print motion border-top-zero"
           >
             <div class="name-flex">
-              <div class="work-name">🧠 BRAINSTORM BLITZ</div>
+              <div class="work-name">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg" alt="Next.js Logo" width="250" style="vertical-align: middle; margin-right: 6px;">
+
+              </div>
               <a
                       data-w-id="74de3796-f07a-6dda-4452-e07e53564dae"
-                      href="https://www.google.com"
+                      href="https://nextjs.org/"
                       target="_blank"
                       class="name-arrow-container w-inline-block"
               ><img
@@ -1864,22 +2020,18 @@
             </div>
             <div class="category-tab-flex">
               <div class="category-tab">
-                <div class="category-text">CONTENT</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">AI STRATEGY</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">BOT DEV</div>
+                <div class="category-text">Fast, scalable, server-side rendering</div>
               </div>
             </div>
           </div>
           <div class="work-element-flex two all verbal-identity web-dev">
             <div class="name-flex">
-              <div class="work-name">🤖 CHATZILLA</div>
+              <div class="work-name">
+                <img src="https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png" alt="FastAPI Logo" width="400" style="vertical-align: middle; margin-right: 6px;">
+</div>
               <a
                       data-w-id="80600498-8cc2-962c-29e6-b8776b851583"
-                      href="https://www.villagebyboa.com"
+                      href="https://fastapi.tiangolo.com"
                       target="_blank"
                       class="name-arrow-container w-inline-block"
               ><img
@@ -1895,22 +2047,19 @@
             </div>
             <div class="category-tab-flex">
               <div class="category-tab">
-                <div class="category-text">UX DESIGN</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">WEB DESIGN</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">INTEGRATIONS</div>
+                <div class="category-text">Fast, scalable, server-side rendering</div>
               </div>
             </div>
           </div>
           <div class="work-element-flex three all content social strategy">
             <div class="name-flex">
-              <div class="work-name">⚓ DEEP DATA DIVE</div>
+              <div class="work-name">
+                <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/google-gemini-icon.png" alt="Gemini Logo" width="30" style="vertical-align: middle; margin-right: 6px;">
+                <strong>Gemini 2.0</strong>
+              </div>
               <a
                       data-w-id="933b5049-7780-c1e5-5a72-a16d3b7050c0"
-                      href="https://www.borntoslay.in"
+                      href="https://aistudio.google.com/prompts/new_chat?model=gemini-2.0-flash-exp"
                       target="_blank"
                       class="name-arrow-container w-inline-block"
               ><img
@@ -1926,22 +2075,19 @@
             </div>
             <div class="category-tab-flex">
               <div class="category-tab">
-                <div class="category-text">DATA ANALYTICS</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">AUTOMATION</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">WEB DEV</div>
+                <div class="category-text">Smart and up-to-date AI responses</div>
               </div>
             </div>
           </div>
           <div class="work-element-flex four all branding packaging print">
             <div class="name-flex">
-              <div class="work-name">🛠️ BOTSHOP LIVE</div>
+              <div class="work-name">
+                <img src="https://pngimg.com/d/meta_PNG5.png" alt="Vector Database Icon" width="40" style="vertical-align: middle; margin-right: 6px;">
+<strong>Vector DB</strong>
+            </div>
               <a
                       data-w-id="a3be5310-1aa7-4863-b393-2f308c3a001e"
-                      href="https://specklesforkids.com"
+                      href="https://www.pinecone.io/learn/vector-database"
                       target="_blank"
                       class="name-arrow-container w-inline-block"
               ><img
@@ -1957,13 +2103,7 @@
             </div>
             <div class="category-tab-flex">
               <div class="category-tab">
-                <div class="category-text">BRANDING</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">PROTOTYPING</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">CHATBOT DEV</div>
+                <div class="category-text">Beautiful, accessible component system</div>
               </div>
             </div>
           </div>
@@ -1971,10 +2111,13 @@
                   class="work-element-flex last-element five all visual-identity album-art pitch-deck"
           >
             <div class="name-flex">
-              <div class="work-name"><strong>🎮 NERD MODE ON</strong></div>
+              <div class="work-name">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Elasticsearch_logo.svg/1024px-Elasticsearch_logo.svg.png" alt="ElasticSearch Logo" width="400" style="vertical-align: middle; margin-right: 6px;">
+          
+              </div>
               <a
                       data-w-id="29b31c74-b615-0b40-2a57-bdcc9fff2753"
-                      href="https://spotify.link/WHlkFdlsKDb"
+                      href="https://www.elastic.co/elasticsearch"
                       target="_blank"
                       class="name-arrow-container w-inline-block"
               ><img
@@ -1990,21 +2133,15 @@
             </div>
             <div class="category-tab-flex">
               <div class="category-tab">
-                <div class="category-text">GAMING</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">BOT LOGIC</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">PERSONALITY DESIGN</div>
+                <div class="category-text">Fast, scalable search solution</div>
               </div>
             </div>
           </div>
-          <div
+          <!-- <div
                   class="work-element-flex last-element five all strategy ad-film content"
-          >
-            <div class="name-flex">
-              <div class="work-name"><strong>🎭 DRAMA BOT</strong></div>
+          > -->
+            <!-- <div class="name-flex">
+              <div class="work-name"><strong>📊 Dataiku</strong></div>
               <a
                       data-w-id="5756415f-edec-fde6-d577-6de2f595924a"
                       href="https://youtu.be/jyNjx_Dz5pA?si=mQugGT22VeM3AVlD"
@@ -2020,24 +2157,18 @@
                       alt=""
                       class="name-arrow hover"
               /></a>
-            </div>
-            <div class="category-tab-flex">
+            </div> -->
+            <!-- <div class="category-tab-flex">
               <div class="category-tab">
-                <div class="category-text">STRATEGY</div>
+                <div class="category-text">Data workflows and analysis</div>
               </div>
-              <div class="category-tab">
-                <div class="category-text">THEME DESIGN</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">CONVERSATIONAL UX</div>
-              </div>
-            </div>
-          </div>
-          <div
+            </div> -->
+          <!-- </div> -->
+          <!-- <div
                   class="work-element-flex last-element five all visual-identity copywriting print"
           >
             <div class="name-flex" >
-              <div class="work-name"><strong>💬 SASSY SUPPORT</strong></div>
+              <div class="work-name"><strong>🤖 Gemini 2.0 by Google</strong></div>
               <a
                       data-w-id="c0d40431-cc1e-1655-060a-087a70e6080d"
                       href="https://level.game"
@@ -2056,13 +2187,7 @@
             </div>
             <div class="category-tab-flex">
               <div class="category-tab">
-                <div class="category-text">FAQ BOT</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">UI DESIGN</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">CUSTOM NLP</div>
+                <div class="category-text">Smart and up-to-date AI responses</div>
               </div>
             </div>
           </div>
@@ -2071,7 +2196,7 @@
           >
             <div class="name-flex">
               <div class="work-name">
-                <strong>🧩 THE AI FIXER</strong>
+                <strong>🔍 OpenAI API</strong>
               </div>
               <a
                       data-w-id="cf677913-d9f4-3bdc-46b1-9429a069bd4f"
@@ -2091,10 +2216,7 @@
             </div>
             <div class="category-tab-flex">
               <div class="category-tab">
-                <div class="category-text">SUPPORT BOT</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">STRATEGY</div>
+                <div class="category-text">Language intelligence</div>
               </div>
             </div>
           </div>
@@ -2102,7 +2224,7 @@
                   class="work-element-flex last-element five all branding visual-identity graphic-design hide"
           >
             <div class="name-flex">
-              <div class="work-name"><strong>💼 CORPO COMRADE</strong></div>
+              <div class="work-name"><strong>🌐 FastAPI</strong></div>
               <a
                       data-w-id="e6db5992-d987-e0b5-09a2-6bdfac906281"
                       href="https://www.instagram.com/socialoffline/"
@@ -2121,13 +2243,7 @@
             </div>
             <div class="category-tab-flex">
               <div class="category-tab">
-                <div class="category-text">INTERNAL TOOL</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">WORKPLACE BOT</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">SLACK INTEGRATION</div>
+                <div class="category-text">Lightning-fast backend APIs</div>
               </div>
             </div>
           </div>
@@ -2135,7 +2251,7 @@
                   class="work-element-flex last-element five all content social motion"
           >
             <div class="name-flex">
-              <div class="work-name"><strong>🎉 PARTY PLANNER AI</strong></div>
+              <div class="work-name"><strong>🧠 Elastic Search</strong></div>
               <a
                       data-w-id="c6143e71-4a21-69c8-f56f-387391e5b0b8"
                       href="https://www.instagram.com/livspace/"
@@ -2154,13 +2270,7 @@
             </div>
             <div class="category-tab-flex">
               <div class="category-tab">
-                <div class="category-text">EVENT TECH</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">CUSTOM BOT FLOW</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">FUN & FUNCTIONAL</div>
+                <div class="category-text">Fast, scalable search solution</div>
               </div>
             </div>
           </div>
@@ -2168,7 +2278,7 @@
                   class="work-element-flex last-element five all content social strategy"
           >
             <div class="name-flex">
-              <div class="work-name"><strong>🌐 WEB3 WHISPERER</strong></div>
+              <div class="work-name"><strong>📊 Dataiku</strong></div>
               <a
                       data-w-id="f7d94e02-16fc-a5fc-2a34-461fbd9a0eb8"
                       href="https://www.instagram.com/ourlittlejoys.ae/"
@@ -2187,13 +2297,7 @@
             </div>
             <div class="category-tab-flex">
               <div class="category-tab">
-                <div class="category-text">WEB3</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">EDTECH BOT</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">TOKEN TALK</div>
+                <div class="category-text">Data workflows and analysis</div>
               </div>
             </div>
           </div>
@@ -2202,7 +2306,7 @@
           >
             <div class="name-flex">
               <div class="work-name">
-                <strong>📚 LEARN WITH LUCY</strong>
+                <strong>📡 Custom API Integrations</strong>
               </div>
               <a
                       data-w-id="dea0c520-a68f-4614-61b2-b7ae02c9415a"
@@ -2222,16 +2326,10 @@
             </div>
             <div class="category-tab-flex">
               <div class="category-tab">
-                <div class="category-text">EDTECH</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">INTERACTIVE BOT</div>
-              </div>
-              <div class="category-tab">
-                <div class="category-text">UX DESIGN</div>
+                <div class="category-text">External services like email, billing, tickets</div>
               </div>
             </div>
-          </div>
+          </div> -->
           <a
                   data-w-id="cfa36cf6-bfe8-59c3-dd4e-42aa61413957"
                   href="/work"
@@ -2244,7 +2342,7 @@
   </div>
 </div>
 <div class="who-are-we-for-outer-container wrapper">
-  <div class="who-are-we-for-section">
+  <div class="who-are-we-for-section" id="chatbot-use">
     <h1
             data-w-id="24f13bb7-8232-e1dd-7b6a-8b6e00cff889"
             style="opacity: 0"
@@ -2337,14 +2435,15 @@
             to “Where’s my stuff?” 🤔📦<br /><br />
             Whether it’s the basics or the oddly specific, we’re always online,
             armed with instant replies and zero attitude.
-          </div>
+          </div><br>
           <a
                   id="shimmer-container"
                   data-w-id="7875749c-d6f9-3a83-f03d-5dd561f81650"
                   href="#"
                   target="_blank"
                   class="outline-btn hero w-inline-block"
-          ><div class="button-text">100% AI-POWERED</div>
+          >
+          <div class="button-text">100% AI-POWERED</div>
             <div id="shimmer-div" class="yellow-div">
               <div class="yellow-div-text">JUST A CLICK</div>
               <div class="shimmer"></div></div
@@ -2358,7 +2457,7 @@
         data-w-id="18e67dcb-10e4-17c8-03fd-0a275a34a2ef"
         class="love-letter-container wrapper"
 >
-  <div class="love-letter-section">
+  <div class="love-letter-section" id="solutions">
     <h1
             data-w-id="aa0f6a6b-b52a-c621-3164-f8523b7ad637"
             style="opacity: 0"
@@ -2403,43 +2502,7 @@
               class="slide-bottom-image-mobile"
       />
       </div>
-      <div class="love-slide six">
-        <div class="love-slide-text-container">
-          <div class="company-logo-container">
-            <img
-                    src="https://cdn.prod.website-files.com/6513c48ced436181a3a12349/6528e96acabc4a6c077eabab_Group%2011118.svg"
-                    loading="lazy"
-                    alt=""
-                    class="company-logo"
-            />
-          </div>
-          <div class="slide-text">
-            ⚡ Our chatbot doesn’t sleep, ghost, or ignore your texts.
-            <br>
-            <br>
-            📲 It’s loyal, lightning fast, and low-key your new digital BFF.
-          </div>
-          <a href="#" class="scroll-down-button w-inline-block"
-          ><div class="primary-text">Scroll</div>
-            <img
-                    src="https://cdn.prod.website-files.com/6513c48ced436181a3a12349/651d5ed6fcecef4c8cb86e14_Group%2010899.svg"
-                    loading="lazy"
-                    alt=""
-                    class="down-arrow"
-            /></a>
-        </div>
-        <img
-                src="https://cdn.prod.website-files.com/6513c48ced436181a3a12349/6528eabb1c309ba4608b2adf_Indifolio.svg"
-                loading="lazy"
-                alt=""
-                class="slide-right-image"
-        /><img
-              src="https://cdn.prod.website-files.com/6513c48ced436181a3a12349/65291586cabc4a6c07b52a86_Indifolio%20mobile.svg"
-              loading="lazy"
-              alt=""
-              class="slide-bottom-image-mobile"
-      />
-      </div>
+
       <div class="love-slide five">
         <div class="love-slide-text-container">
           <div class="company-logo-container">
@@ -2636,7 +2699,7 @@
             />
           </div>
           <div class="slide-text">
-            📱 DESIGNED FOR MOBILE, BECAUSE WHO USES DESKTOPS AT THE BEACH?
+            📱 DESIGNED FOR EVEN MOBILE, BECAUSE WHO USES DESKTOPS AT THE BEACH?
             <br>
             Support your customers where they are — probably doomscrolling 😅📲.
           </div>
@@ -3385,7 +3448,7 @@
   </div>
 </div>
 <div class="faq-container wrapper">
-  <div class="faq-section">
+  <div class="faq-section" id="faq">
     <h1
             data-w-id="5b75f880-9cb4-8465-9a3d-e5ef40adb54d"
             style="opacity: 0"
@@ -3544,6 +3607,9 @@
           alt=""
           class="dookan-logo"
   />
+  <br>
+  <br>
+  <br>
   <div
           data-w-id="1313288f-ae33-31a8-b925-8f969db173cf"
           style="opacity: 0"
@@ -3578,7 +3644,7 @@
       />
     </div>
   </div>
-  <h1 class="footer-top-heading">
+  <h1 class="footer-top-heading" id="contact">
     WE’VE GOT<br />YOUR<span class="b-image-container">     </span>ACK
   </h1>
 </div>
@@ -3659,7 +3725,7 @@
       </div>
     </div>
     <div class="privacy-block">
-      <h1 class="footer-heading">📜 FINE PRINTISH</h1>
+      <h1 class="footer-heading">📜 THE BORING STUFF</h1>
       <div class="link-container last">
         <a
                 data-w-id="103d5a4a-ff5e-8752-2fe7-17fd1bd53e62"
@@ -3706,6 +3772,16 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
         crossorigin="anonymous"
 ></script>
+<script>
+  function scrollToSection(id) {
+    if (!id) return;
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+</script>
+
 <script
         src="https://cdn.prod.website-files.com/6513c48ced436181a3a12349/js/webflow.e95f6dc1.485cb9bee9394857.js"
         type="text/javascript"
